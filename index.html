@@ -2,131 +2,155 @@
   <body>
     Here is one mermaid diagram:
     <pre class="mermaid">
-            ---
+---
 config:
   theme: redux
   layout: dagre
   htmlLabels: true,
 ---
 flowchart TD
-  subgraph one[" "]
-    CA["Constant Coefficients<br>
+ subgraph one[" "]
+        CA["Constant Coefficients<br>
         CF and PI"]
-    C("Linear")
-
-    CB["Non-Constant Coefficients<br>
+        C("Linear")
+        CB["Non-Constant Coefficients<br>
     Integrating Factor"]
   end
-
-  A[["Differential Eq"]] --> B{"1st Order"}
-  B --> C & BA("Non-Linear<br/>Q(x,y)<i>dy</i>/<i>dx</i> + P(x,y) = 0")
-  C --> CA & CB
-
-
-  subgraph three[" "]
-  subgraph two[" "]
-    BA --> BAA["Separable<br/><i>q(y)</i><i>dy</i>=<i>p(x)</i><i>dx</i>"]
-    BA --> BAB["Exact<br/><i>df</i> = P(x,y)<i>dx</i> + Q(x,y)<i>dy</i>"]
-    BAB e1@<--> BABA[["
-      By Chain Rule:<br/>
-      <i>df</i> = &part;<i>f</i>/&part;x <i>dx</i> + &part;<i>f</i>/&part;y <i>dy</i><br/>
-      Then:<br/>
-      P = &part;f/&part;x |<sub>y</sub><br/>
-      Q = &part;f/&part;y |<sub>x</sub><br/>
-      So:<br/>
-      &part;P/&part;y = &part;Q/&part;x<br/>
-      and in a <em>simply connected domain</em> it is necessary and sufficient condition for P(x,y)<i>dx</i> + Q(x,y)<i>dy</i> to be exact.<br/>
-      Also, <i>df</i> = 0 ⇒ <i>f</i>(x, y) = const. is the solution.
-    "]]
-    BABA --> BABAB["To Solve:<br/>
-      <i>f</i>(x,y) = ∫ P&nbsp;<i>dx</i> = ... + h(y) because &part;h(y)/&part;x |<sub>y</sub> = 0<br/>
-      Then:<br/>
-      Take the above <i>f</i> to solve for h(y) using Q = &part;f/&part;y |<sub>x</sub><br/>
-      This gives the final <i>f</i>(x,y) = const.
-    "]
-    e1@{ animate: true }
+ subgraph two[" "]
+        BAA["Separable<br><i>q(y)</i><i>dy</i>=<i>p(x)</i><i>dx</i>"]
+        BA("Non-Linear<br>Q(x,y)<i>dy</i>/<i>dx</i> + P(x,y) = 0")
+        BAB["Exact<br><i>df</i> = P(x,y)<i>dx</i> + Q(x,y)<i>dy</i>"]
+        BABA[["By Chain Rule:<br>
+      <i>df</i> = ∂<i>f</i>/∂x <i>dx</i> + ∂<i>f</i>/∂y <i>dy</i><br>
+      Then:<br>
+      P = ∂f/∂x |<sub>y</sub><br>
+      Q = ∂f/∂y |<sub>x</sub><br>
+      So:<br>
+      ∂P/∂y = ∂Q/∂x<br>
+      and in a <em>simply connected domain</em> it is necessary and sufficient condition for P(x,y)<i>dx</i> + Q(x,y)<i>dy</i> to be exact.<br>
+      Also, <i>df</i> = 0 ⇒ <i>f</i>(x, y) = const. is the solution."]]
+        BABAB["To Solve:<br>
+      <i>f</i>(x,y) = ∫ P&nbsp;<i>dx</i> = ... + h(y) because ∂h(y)/∂x |<sub>y</sub> = 0<br>
+      Then:<br>
+      Take the above <i>f</i> to solve for h(y) using Q = ∂f/∂y |<sub>x</sub><br>
+      This gives the final <i>f</i>(x,y) = const."]
   end
-
-    BA --> BAC["Not Solvable<br/><i>dy</i>/<i>dt</i> = f(t,y)"]
-    BAC --> BACA["Fixed/Equilibrium points<br/>They are constant solutions i.e., y=const<br/>so <i>dy</i>/<i>dt</i> = 0 = <i>f</i>(t,y)"]
-    BACA --> BACAA["Stability of fixed points<br/>Phase portraits show stability on y(t) 1D line with fixed points."]
-    BACAA --> BACAAA["Autonomous System<br/><i>dy</i>/<i>dt</i> = <i>f</i>(t)"]
-    BAA -...-> BACAAA
-    BACAAA --> BACAAAA["Let <i>c</i> be a fixed point then:<br/>
-      if <i>f</i> '(<i>c</i>) &lt; 0 ⇒ stable<br/>
-      if <i>f</i> '(<i>c</i>) &gt; 0 ⇒ unstable"]
-    BACAA --> BACAAB["Non-Autonomous System"]
-    BACAAB --> BACAABA[["
-      <strong>Perturbation analysis</strong><br/>
-      Let y = <i>c</i> be a fixed point,<br/>
-      y(t) = <i>c</i> + ε(t), small perturbation.<br/>
-      Using Taylor:<br/>
-      <i>d ε</i>/<i>dt</i> ≈ ε [&part;f/&part;y (t,<i>c</i>)]<br/>
-      if &part;f/&part;y = 0 at the fixed point, retain higher-order terms.<br/>
-      if ε(t) → 0 as t → ∞ ⇒ stable<br/>
-      if |ε(t)| → ∞ as t → ∞ ⇒ unstable
-    "]]
-    BACA -.-> BACAB["Discrete 1st order<br/>x<sub>n+1</sub> = <i>f</i>(x<sub>n</sub>) where <i>f</i> is independent of n<br/>
-                    fixed point: <br/>x<sub>n</sub> = <i>f</i>(x<sub>n</sub>)
-                    <br>Let <i>x<sub>f</sub></i> is the fixed point.
-                    if |<i>f</i> '(x<sub>f</sub>)| < 1 ⇒ stable
-                    if |<i>f</i> '(x<sub>f</sub>)| > 1 ⇒ un-stable
-                    "]
+ subgraph three[" "]
+        two
+        BAC["Not Solvable<br><i>dy</i>/<i>dt</i> = f(t,y)"]
+        BACA["Fixed/Equilibrium points<br>They are constant solutions i.e., y=const<br>so <i>dy</i>/<i>dt</i> = 0 = <i>f</i>(t,y)"]
+        BACAA["Stability of fixed points<br>Phase portraits show stability on y(t) 1D line with fixed points."]
+        BACAAA["Autonomous System<br><i>dy</i>/<i>dt</i> = <i>f</i>(t)"]
+        BACAAAA@{ label: "Let <i>c</i> be a fixed point then:<br>\n      if <i>f</i> '(<i>c</i>) &lt; 0 ⇒ stable<br>\n      if <i>f</i> '(<i>c</i>) &gt; 0 ⇒ unstable" }
+        BACAAB["Non-Autonomous System"]
+        BACAABA[["<strong>Perturbation analysis</strong><br>
+      Let y = <i>c</i> be a fixed point,<br>
+      y(t) = <i>c</i> + ε(t), small perturbation.<br>
+      Using Taylor:<br>
+      <i>d ε</i>/<i>dt</i> ≈ ε [∂f/∂y (t,<i>c</i>)]<br>
+      if ∂f/∂y = 0 at the fixed point, retain higher-order terms.<br>
+      if ε(t) → 0 as t → ∞ ⇒ stable<br>
+      if |ε(t)| → ∞ as t → ∞ ⇒ unstable"]]
+        BACAB@{ label: "Discrete 1st order<br>x<sub>n+1</sub> = <i>f</i>(x<sub>n</sub>) where <i>f</i> is independent of n<br>\n                    fixed point: <br>x<sub>n</sub> = <i>f</i>(x<sub>n</sub>)\n                    <br>Let <i>x<sub>f</sub></i> is the fixed point.\n                    if |<i>f</i> '(x<sub>f</sub>)| &lt; 1 ⇒ stable\n                    if |<i>f</i> '(x<sub>f</sub>)| &gt; 1 ⇒ un-stable" }
   end
-
-  A --> D{"2nd Order"}
-  D --> DA["Constant Coeff<br><br>Normal CF and PI"]
-  D --> DB["Non-Constant coeff
-            y '' + p(x) y ' + q(x) y = f(x)
-            "]
-  DB --"Solving CF"--> DBA[["
-    <b>Reduction of Order</b>
-    Suppose that we know a first complementary function y<sub>1</sub>(x)
-    let y<sub>2</sub>(x) = v(x)y<sub>1</sub>(x)
-    then using product rule we get
-    v '' y<sub>1</sub> + v ' (2y<sub>1</sub> + p) = 0
-    let v ' = u, then
-    u(x) = A/y<sub>1</sub><sup>2</sup>(x) exp(-∫<sub>0</sub><sup>x</sup>p(t)<i>dt</i>)
-    "]]
-  D --> DC["Linear Equidimensional Equations
-            ax<sup>2</sup>y '' + bx<sup></sup>y ' + cy = f(x)
-            "]
-  DC --> DCA["To solve this: notice that xd/dx has eigen function x<sup>k</sup>.
+ subgraph s1["Untitled subgraph"]
+        DA["Constant Coeff<br><br>Normal CF and PI"]
+        DB@{ label: "Non-Constant coeff\n            y '' + p(x) y ' + q(x) y = f(x)" }
+        DBA@{ label: "<b>Reduction of Order</b>\n    Suppose that we know a first complementary function y<sub>1</sub>(x)\n    let y<sub>2</sub>(x) = v(x)y<sub>1</sub>(x)\n    then using product rule we get\n    v '' y<sub>1</sub> + v ' (2y<sub>1</sub> + p) = 0\n    let v ' = u, then\n    u(x) = A/y<sub>1</sub><sup>2</sup>(x) exp(-∫<sub>0</sub><sup>x</sup>p(t)<i>dt</i>)" }
+        DC@{ label: "Linear Equidimensional Equations\n            ax<sup>2</sup>y '' + bx<sup></sup>y ' + cy = f(x)" }
+        DCA["To solve this: notice that xd/dx has eigen function x<sup>k</sup>.
             Hence try y=x<sup>k</sup> as the eigen function in CF.
             <br>Degenrate Case: y<sub>1</sub>=(lnx)x<sup>k</sup>
-            <br>Resonant Case: y<sub>p</sub>=C(lnx)x<sup>k</sup> or C(lnx)<sup>2</sup>x<sup>k</sup> for double resonant.
-  "]
-  D --Solving PI--> DCB["
-                        Use the standard trial functions. Account for the resonant case.
-                        <br>To find a particular integral given linearly independent complementary functions y<sub>1</sub>(x) and y<sub>2</sub>(x), use <i><b>variation of parameters</b></i>.
-                    
-                        "]
-
-  A --> E("
-  n-th Order
-  y<sup>(n)</sup> + p(x)y<sup>(n-1)</sup> + ... + q(x)y = <i>f</i>(x)
-  ")
-  E ----> EA[["
-            <b>Phase Space</b>
+            <br>Resonant Case: y<sub>p</sub>=C(lnx)x<sup>k</sup> or C(lnx)<sup>2</sup>x<sup>k</sup> for double resonant."]
+        DCB["Use the standard trial functions. Account for the resonant case.
+                        <br>To find a particular integral given linearly independent complementary functions y<sub>1</sub>(x) and y<sub>2</sub>(x), use <i><b>variation of parameters</b></i>."]
+        %% DCC["
+        %%     <b>Impulses and point forces</b>
+        %%     <br>Delta function: D(t;ε)
+        %%     1. lim ε→0 D(t;ε)= 0 ∀ t ≠ 0
+        %%     2. ∫<sub>-∞</sub><sup>∞</sup> D(t;ε)dt = 1
+        %%     <br>Dirac delta function δ(x)
+        %%     δ(x) = lim ε→0 D(t;ε)
+        %%     1. δ(x) = 0 ∀ x ≠ 0
+        %%     2. ∫<sub>-∞</sub><sup>∞</sup> δ(x) dx = 1
+        %%     3. for all functions g(x) that are continuous at x = 0,
+        %%     ∫<sub>-∞</sub><sup>∞</sup> g(x)δ(x) dx = 
+        %%     = lim ε→0 ∫<sub>-∞</sub><sup>∞</sup> g(x)D(t;ε)dt =
+        %%     = g(0)
+        %%     <br>When Solving divide the DE into regions on either side delta function split.
+        %%     Solve then individually, then integrate the original DE. From here, all the terms will vanish except the (n-1)th order term, in 2-order DE, it will be first deriviative.
+        %%     Now y(x) has to be continuous at the breaking points. Also, consider the jump limit of the 1st derivative. Evaluate from each region by taking the x<sub>x</sub>+ε and x<sub>x</sub>-ε on the corresponding DE.
+        %%     "]
+    DCD["<b>Impulses and point forces</b><br/>
+    <u>Delta function</u>: D(t;ε)<br/>
+    1. lim ε→0 D(t;ε)=0 ∀ t ≠ 0<br/>
+    2. ∫<sub>-∞</sub><sup>∞</sup> D(t;ε) dt = 1<br/><br/>
+    <u>Dirac delta function</u> δ(x):<br/>
+    δ(x) = lim ε→0 D(t;ε)<br/>
+    • δ(x)=0 ∀ x≠0<br/>
+    • ∫<sub>-∞</sub><sup>∞</sup>δ(x)dx=1<br/>
+    • ∫<sub>-∞</sub><sup>∞</sup>g(x)δ(x)dx = g(0)<br/><br/>
+    <u>Solution strategy</u>:<br/>
+    • Split DE into regions x<0 and x>0<br/>
+    • Solve homogeneously on each side<br/>
+    • Integrate original DE across x=0 → only (n–1)th term survives (1st derivative for 2nd order)<br/>
+    • Enforce y continuous at x=0, then jump in y′ from the integral condition by evaluating y′ at x<sub>0</sub>+ε and x<sub>0</sub>-ε"]
+  HSF["<b>Forcing with the Heaviside step function</b><br/>
+    <u>Heaviside step function</u> H(x):<br/>
+    H(x)=0 for x<0, H(x)=1 for x>0<br/><br/>
+    <u>Forced ODE</u>:<br/>
+    y'' + p(x)y' + q(x)y = H(x)<br/><br/>
+    <u>Piecewise formulation</u>:<br/>
+    • For x<0: y'' + p(x)y' + q(x)y = 0 → y_-(x)<br/>
+    • For x>0: y'' + p(x)y' + q(x)y = 1 → y_+(x)=y_p + homogeneous part<br/><br/>
+    <u>Matching conditions at x=0</u>:<br/>
+    • Continuity of y: y_-(0)=y_+(0)<br/>
+    • Continuity of y′: y_-'(0)=y_+'(0)<br/>
+    • Jump in y″: y_+''(0) − y_-''(0) = 1<br/><br/>
+    <u>Solution steps</u>:<br/>
+    1. Solve homogeneous equations on x<0 and x>0<br/>
+    2. Find particular solution y_p for x>0<br/>
+    3. Apply matching conditions to determine constants"]
+  end
+    A[["Differential Eq"]] --> B{"1st Order"} & D{"2nd Order"} & E("n-th Order
+  y<sup>(n)</sup> + p(x)y<sup>(n-1)</sup> + ... + q(x)y = <i>f</i>(x)")
+    B --> C & BA
+    C --> CA & CB
+    BA --> BAA & BAB & BAC
+    BAB e1@<--> BABA
+    BABA --> BABAB
+    BAC --> BACA
+    BACA --> BACAA
+    BACAA --> BACAAA & BACAAB
+    BAA -...-> BACAAA
+    BACAAA --> BACAAAA
+    BACAAB --> BACAABA
+    BACA -.-> BACAB
+    D --> DA & DB & DC
+    DB -- Solving CF --> DBA
+    DC --> DCA
+    D -- Solving PI --> DCB
+    D ~~~~ HSF & DCD
+    E ----> EA[["<b>Phase Space</b>
             y<sup>(n)</sup> is determined completely by y<sup>(n-1)</sup>,..,y.
             Hence at some initial point x<sub>0</sub>, if we know these n-1 derivatives, then using taylor we can uniquely get the solution of the equaltion.
             <br>We can therefore think of the state of the system governed by the differential equation as being fully specified at any value of the independent variable by the <i>solution vector</i> <b><u>Y</u></b>(x) = (y<sup>(n-1)</sup> ... y). 
-            <br>This vector defines a point in a n-dimensional <i>phase space</i>.
-            "]]
-  E ----> EB[["
-            <b>Wronskian</b>
-            W(x) = |(<b><u>Y</u><sub>1</sub></b>&nbsp;  <b><u>Y</u><sub>2</sub></b> &nbsp;...&nbsp; <b><u>Y</u><sub>n</sub></b>)|
-            <br>Then if for some <i>x</i> we have W(x) ≠ 0&nbsp;⇒ { y<sub>i</sub> } are linearly independent.
-            <br>But W(x) = 0&nbsp;⇏ { y<sub>i</sub> } are linearly dependent.
-            <br>W ' = -p(x) W
-            ⇒ W(x) = W(x<sub>0</sub>)exp(-∫<sub>x<sub>0</sub></sub><sup>x</sup> p(t) <i>dt</i>)
-            <br> If p(x) and q(x) are CTS on interval I, than either W(x)=0 for all x in I or W(x) ≠ 0 for all x in I.
-            "]]
-  EB -.-> EBB["2D Wronskian: If we know y<sub>1</sub>, than we can solve for y<sub>2</sub> as below
-                <br>y<sub>1</sub>y<sub>2</sub>' - y<sub>1</sub>' y<sub>2</sub> = W(x<sub>0</sub>)exp(-∫<sub>x<sub>0</sub></sub><sup>x</sup> p(t) <i>dt</i>)
-                ⇒ d(y<sub>2</sub>/y<sub>1</sub>) /dx = W(x<sub>0</sub>)/y<sub>1</sub><sup>2</sup> exp(-∫<sub>x<sub>0</sub></sub><sup>x</sup> p(t) <i>dt</i>)
-                "]
-  DBA <-..-> EBB
+            <br>This vector defines a point in a n-dimensional <i>phase space</i>."]] & EB@{ label: "<b>Wronskian</b>\n            W(x) = |(<b><u>Y</u><sub>1</sub></b>&nbsp;  <b><u>Y</u><sub>2</sub></b> &nbsp;...&nbsp; <b><u>Y</u><sub>n</sub></b>)|\n            <br>Then if for some <i>x</i> we have W(x) ≠ 0&nbsp;⇒ { y<sub>i</sub> } are linearly independent.\n            <br>But W(x) = 0&nbsp;⇏ { y<sub>i</sub> } are linearly dependent.\n            <br>W ' = -p(x) W\n            ⇒ W(x) = W(x<sub>0</sub>)exp(-∫<sub>x<sub>0</sub></sub><sup>x</sup> p(t) <i>dt</i>)\n            <br> If p(x) and q(x) are CTS on interval I, than either W(x)=0 for all x in I or W(x) ≠ 0 for all x in I." }
+    EB -.-> EBB@{ label: "2D Wronskian: If we know y<sub>1</sub>, than we can solve for y<sub>2</sub> as below\n                <br>y<sub>1</sub>y<sub>2</sub>' - y<sub>1</sub>' y<sub>2</sub> = W(x<sub>0</sub>)exp(-∫<sub>x<sub>0</sub></sub><sup>x</sup> p(t) <i>dt</i>)\n                ⇒ d(y<sub>2</sub>/y<sub>1</sub>) /dx = W(x<sub>0</sub>)/y<sub>1</sub><sup>2</sup> exp(-∫<sub>x<sub>0</sub></sub><sup>x</sup> p(t) <i>dt</i>)" }
+    DBA <-..-> EBB
+    BACAAAA@{ shape: rect}
+    BACAB@{ shape: rect}
+    DB@{ shape: rect}
+    DBA@{ shape: subroutine}
+    DC@{ shape: rect}
+    EB@{ shape: subroutine}
+    EBB@{ shape: rect}
+    style two fill:#00C853
+    style three fill:#C8E6C9
+    style one fill:#BBDEFB
+    style s1 fill:#FFE0B2
+    e1@{ animate: true }
+
     </pre>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
